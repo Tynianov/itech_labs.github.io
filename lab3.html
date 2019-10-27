@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 3</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="lab3.js" type="text/javascript"></script>
+    <style type="text/css">
+        body {
+            background-color: rgba(0, 0, 0, 0.83)
+        }
+
+        label, a, p, li {
+            color: white;
+        }
+
+        .row {
+            display: inline;
+        }
+
+        .left {
+            float: left;
+
+        }
+
+        .right {
+            float: right;
+
+        }
+    </style>
+</head>
+<body>
+<div class="row left">
+    <label for="last_name">Имя сотрудника</label>
+    <input type="text" id="last_name">
+    <br>
+    <label for="work_time">Дата приема на работу</label>
+    <input type="date" id="work_time">
+    <br>
+    <button id="submit">Добавить</button>
+</div>
+
+<div class="row right">
+    <p>Cредний стаж работы:</p>
+    <p id="experience">0 Дней</p>
+    <p>Список работников (Фамилия : дата устройства на работу)</p>
+    <ul id="worker_list">
+    </ul>
+</div>
+</body>
+</html>
