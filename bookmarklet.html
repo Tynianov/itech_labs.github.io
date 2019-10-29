@@ -1,13 +1,12 @@
-$(function () {
-    $('#button').click(function () {
-        $('.scriptcode').each(function () {
-            let div = $(this);
-            if (div.find('button').length === 0)
-                div.prepend(`<button id='copy_code' onclick='copyCode(this)'>Copy</button>`);
-        });
-    });
+<a href="javascript:
+window.frames[0].$('.scriptcode').each(function () {
+    let div = $(this);
+    if (div.find('button').length === 0)
+        div.prepend(`<button id='copy_code' onclick='copyCode(this)'>Copy</button>`);
 });
 
+window.frames[0].$('head').append(`
+<script>
 function copyCode(item) {
     let code = item.parentNode.lastElementChild;
     let text = code.lastElementChild.outerText;
@@ -20,3 +19,5 @@ function copyCode(item) {
             console.log('Что-то пошло не так: ', err);
         })
 }
+</script>`
+);">Копировать</a>
