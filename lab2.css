@@ -1,0 +1,30 @@
+.jump-button {
+    text-align: center;
+    padding: 10px;
+    background-color: #630c1a;
+    text-transform: uppercase;
+    position: relative;
+    font-weight: bold;
+    animation: bounce 1.8s infinite;
+    border-radius: 10%;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.83)
+}
+
+a, p, .jump-button {
+    color: #dadae2;
+}
+
+@keyframes bounce {
+    0% {
+        bottom: 0;
+    }
+    50% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
