@@ -1,16 +1,24 @@
 <a href="javascript:
-window.frames[0].$('.scriptcode').each(function () {
+$ = window.frames[0].$;
+$('.scriptcode').each(function () {
     let div = $(this);
     if (div.find('button').length === 0)
         div.prepend(`<button id='copy_code' onclick='copyCode(this)'>Copy</button>`);
 });
 
-window.frames[0].$('head').append(`
+$('head').append(`
 <script>
 function copyCode(item) {
-    let code = item.parentNode.lastElementChild;
-    let text = code.lastElementChild.outerText;
-    console.log(text);
+    let code = $(item).parent();
+    let title = code.find('.title').children();
+    let index = 0;
+    for (let i = 0; i < title.length; i++){
+        if (!title[i].className) {
+            index = i;
+            break;
+        }
+    }
+    let text = code.find('pre')[index].outerText;
     navigator.clipboard.writeText(text)
         .then(() => {
             console.log('Успешно скопировано');
