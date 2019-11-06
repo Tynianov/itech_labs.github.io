@@ -1,7 +1,24 @@
+#pageHeader { 
+    font-size: 120%;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: rgb(252, 252, 252);
+    background-color: rgb(38, 103, 163); 
+    top: 70px; 
+    position: relative;
+   }
+
+#color {
+    background-color: rgb(31, 31, 31);
+}
+.fig {
+float:  left
+}
+
+
 .jump-button {
     text-align: center;
     padding: 10px;
-    background-color: #630c1a;
+    background-color: #ffe656;
     text-transform: uppercase;
     position: relative;
     font-weight: bold;
@@ -14,7 +31,7 @@ body {
 }
 
 a, p, .jump-button {
-    color: #dadae2;
+    color: #2366b3;
 }
 
 @keyframes bounce {
