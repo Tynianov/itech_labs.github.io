@@ -5,7 +5,7 @@
     <title>Ответ</title>
 </head>
 <body>
-    <a href="lab4.html">Назад</a>
+    <a href="index.html">Назад</a>
     <br><br>
     <?php
     $rows = $_POST['rows'] + 0;

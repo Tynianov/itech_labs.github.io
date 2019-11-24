@@ -1,19 +1,19 @@
-#pageHeader { 
+#pageHeader {
     font-size: 120%;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: rgb(252, 252, 252);
-    background-color: rgb(38, 103, 163); 
-    top: 70px; 
+    background-color: rgb(38, 103, 163);
+    top: 70px;
     position: relative;
-   }
+}
 
 #color {
     background-color: rgb(31, 31, 31);
 }
-.fig {
-float:  left
-}
 
+.fig {
+    float: left
+}
 
 .jump-button {
     text-align: center;
