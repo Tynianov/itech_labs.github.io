@@ -1,0 +1,31 @@
+<a href="javascript:
+$ = window.frames[0].$;
+$('.scriptcode').each(function () {
+    const div = $(this);
+    if (div.find('button').length === 0)
+        div.prepend(`<button onclick='copyCode(this)'>Copy</button>`);
+});
+
+$('head').append(`
+<script>
+function copyCode(item) {
+    const code = $(item).parent();
+    const title = code.find('.title').children();
+    let index = 0;
+    for (let i = 0; i < title.length; i++){
+        if (!title[i].className) {
+            index = i;
+            break;
+        }
+    }
+    const text = code.find('pre')[index].outerText;
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            console.log('Успешно скопировано');
+        })
+        .catch(err => {
+            console.log('Что-то пошло не так: ', err);
+        })
+}
+</script>`
+);">Копировать</a>
