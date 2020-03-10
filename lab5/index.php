@@ -40,7 +40,7 @@
                         ];
                         try {
                             $dbh = new PDO($dsn, $username, $password, $options);
-                            $sql = "SELECT * FROM client";
+                            $sql = "SELECT `id`, `name` FROM client";
                             foreach ($dbh->query($sql) as $row) {
                                 $id = $row['id'];
                                 $name = $row['name'];

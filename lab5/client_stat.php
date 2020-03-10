@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -34,13 +33,10 @@
         $client_id = $_POST['client_id'];
 
         $sql = "SELECT * FROM seanse WHERE client_id=$client_id";
-        foreach ($dbh->query($sql) as $row) {
-            $in_trafic = $row['in_trafic'];
-            $out_trafic = $row['out_trafic'];
-            $client_id = $row['client_id'];
-
-            print "<br> in: $in_trafic out: $out_trafic client_id: $client_id";
-        }
+            foreach ($dbh->query($sql) as $row) {
+                var_dump($row);
+                print '<br><br>';
+            }
     } catch (PDOException $e) {
         echo $e;
     }

@@ -29,18 +29,13 @@
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ];
     try {
-    $dbh = new PDO($dsn, $username, $password, $options);
+        $dbh = new PDO($dsn, $username, $password, $options);
 
-    $sql = "SELECT * FROM client WHERE balance < 0";
-        foreach ($dbh->query($sql) as $row) {
-            $id = $row['id'];
-            $balance = $row['balance'];
-            $login = $row['login'];
-            $name = $row['name'];
-            print "<br> id: $id name: $name login: $login balance: $balance";
-        }
-
-    } catch(PDOException $e) {
+        $sql = "SELECT * FROM client WHERE balance < 0";
+            foreach ($dbh->query($sql) as $row) {
+                var_dump($row);
+            }
+    } catch (PDOException $e) {
         echo $e;
     }
 

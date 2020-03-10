@@ -32,20 +32,13 @@
         $dbh = new PDO($dsn, $username, $password, $options);
         $start_p = $_POST['date_start'];
         $end_p = $_POST['date_end'];
+
         print "$start_p - $end_p<br><br>";
-
         $sql = "SELECT * FROM seanse WHERE start > '$start_p' and end < '$end_p'";
-
-
-        foreach ($dbh->query($sql) as $row) {
-            $in_trafic = $row['in_trafic'];
-            $out_trafic = $row['out_trafic'];
-            $client_id = $row['client_id'];
-            $start = $row['start'];
-            $end = $row['end'];
-
-            print "in: $in_trafic out: $out_trafic client_id: $client_id  (start:$start end: $end)<br> <br> ";
-        }
+            foreach ($dbh->query($sql) as $row) {
+                var_dump($row);
+                print '<br><br>';
+            }
     } catch (PDOException $e) {
         echo $e;
     }
