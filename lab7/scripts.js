@@ -3,7 +3,7 @@ $(document).ready(function () {
         $.ajax({
             url: 'client_time.php',
             type: "post",
-            data: {date_start: $('#date_start').val(), date_end: $('#date_end').val()},
+            data: { date_start: $('#date_start').val(), date_end: $('#date_end').val() },
             success: function (data) {
                 $('#html').val(data);
             },
@@ -17,7 +17,7 @@ $(document).ready(function () {
         $.ajax({
             url: 'below_zero.php',
             type: "post",
-            data: {doc_type: 'json'},
+            data: { doc_type: 'json' },
             success: function (data) {
                 let jsonVal = JSON.parse(data);
                 $('#json').val(JSON.stringify(jsonVal));
@@ -30,18 +30,16 @@ $(document).ready(function () {
 
     $('#client_stat').click(function () {
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'client_stat.php', true);
-        xhr.responseType = 'document';
-        xhr.overrideMimeType('text/xml');
-
-        xhr.onload = function () {
-            if (xhr.readyState === xhr.DONE) {
-                if (xhr.status === 200) {
-                    console.log(xhr.response);
-                    console.log(xhr.responseXML);
-                }
+        let client = $('#client_id').val();
+        var params = `client_id=${client}`;
+        xhr.open('POST', `client_stat.php`, true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+       
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                $('#xml').val(xhr.response);
             }
-        };
-
+        }
+        xhr.send(params);
     });
 });
