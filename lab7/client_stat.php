@@ -22,11 +22,10 @@ try {
     foreach ($dbh->query($sql) as $row) {
         $client_node = $dom->createElement('client');
         $client_node->setAttributeNode(new DOMAttr('id', $row['id']));
-        $child_node_title = $dom->createElement('start', $row['start']);
+        $client_node->appendChild($dom->createElement('start', $row['start']));
         $client_node->appendChild($dom->createElement('end', $row['end']));
         $client_node->appendChild($dom->createElement('in_trafic', $row['in_trafic']));
         $client_node->appendChild($dom->createElement('out_trafic', $row['out_trafic']));
-        $client_node->appendChild($child_node_title);
         $client_node->appendChild($dom->createElement('client_id', $row['client_id']));
         $root->appendChild($client_node);
     }
