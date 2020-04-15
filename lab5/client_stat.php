@@ -32,11 +32,13 @@
         $dbh = new PDO($dsn, $username, $password, $options);
         $client_id = $_POST['client_id'];
 
-        $sql = "SELECT * FROM seanse WHERE client_id=$client_id";
-            foreach ($dbh->query($sql) as $row) {
-                var_dump($row);
-                print '<br><br>';
-            }
+        $sql = $dbh->prepare('SELECT * FROM seanse WHERE client_id=:client_id');
+        $sql->bindParam(':client_id', $client_id);
+        $sql->execute();
+        while($row = $sql->fetch()){
+            var_dump($row);
+            print '<br><br>';
+        }
     } catch (PDOException $e) {
         echo $e;
     }
