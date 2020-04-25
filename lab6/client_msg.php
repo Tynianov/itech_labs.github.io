@@ -19,30 +19,23 @@
 
 <body>
     <?php
-    $database = "itech_var8";
-    $username = "root";
-    $password = "";
-    $dsn = "mysql:host=127.0.0.1;port=3306;dbname=$database;charset=utf8";
-
-    $options = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ];
-    try {
-        $dbh = new PDO($dsn, $username, $password, $options);
-        $start_p = $_POST['date_start'];
-        $end_p = $_POST['date_end'];
-
-        print "$start_p - $end_p<br><br>";
-        $sql = "SELECT * FROM seanse WHERE start > '$start_p' and end < '$end_p'";
-            foreach ($dbh->query($sql) as $row) {
-                var_dump($row);
-                print '<br><br>';
+        require_once __DIR__ . "/vendor/autoload.php";
+        $client = $_POST['client'];
+        try {
+            $collection = (new MongoDB\Client)->itech_var8->user;
+            $cursor = $collection->aggregate(array(
+                array(
+                    '$match' => array(
+                        'ip' => "$client"
+                    )
+                )
+            ));
+            foreach ($cursor as $doc) {
+                print_r($doc['messages']);
             }
-    } catch (PDOException $e) {
-        echo $e;
-    }
-
+        } catch (PDOException $e) {
+            echo $e;
+        }
     ?>
 </body>
 

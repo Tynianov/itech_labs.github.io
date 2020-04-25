@@ -27,14 +27,12 @@
         <tr>
             <td>
                 <form action="client_msg.php" method="POST">
-                    <select id="client_id" name="client_id">
+                    <select id="client" name="client">
                         <?php
                         require_once __DIR__ . "/vendor/autoload.php";
 
-                        phpinfo();
-                        $m = new MongoDB\Client();
                         try {
-                            foreach ($m->itech_var8->user->find() as $row) {
+                            foreach ((new MongoDB\Client)->itech_var8->user->find() as $row) {
                                 $ip = $row['ip'];
                                 $name = $row['login'];
                                 print "<option value='$ip'>$name</option>";
@@ -49,12 +47,57 @@
             </td>
             <td>
                 <form action="io_traffic.php" method="post">
-                    <button>Submit</button>
+                    <textarea cols="40" rows="10">
+                    <?php
+                        require_once __DIR__ . "/vendor/autoload.php";
+
+                        try {
+                            $collection = (new MongoDB\Client)->itech_var8->sessions;
+                            $cursor = $collection->aggregate(array(
+                                array(
+                                    '$group' => array(
+                                        '_id' => NULL,
+                                        'total' => array(
+                                            '$sum' => '$in_traffic'
+                                        )
+                                    )
+                                )
+                            ));
+                            foreach ($cursor as $doc) {
+                                echo $doc['total'] . "\n";
+                            }
+                        } catch (PDOException $e) {
+                            echo $e;
+                        }
+                        ?>
+                    </textarea>
+
                 </form>
             </td>
             <td>
                 <form action="below_zero.php">
-                    <button>Submit</button>
+                <textarea cols="40" rows="10">
+                    <?php
+                        require_once __DIR__ . "/vendor/autoload.php";
+                        try {
+                            $collection = (new MongoDB\Client)->itech_var8->user;
+                            $cursor = $collection->aggregate(array(
+                                array(
+                                    '$match' => array(
+                                        'balance' => array(
+                                            '$gt' => 0
+                                        )
+                                    )
+                                )
+                            ));
+                            foreach ($cursor as $doc) {
+                                echo $doc['login'] . "\n";
+                            }
+                        } catch (PDOException $e) {
+                            echo $e;
+                        }
+                        ?>
+                    </textarea>
                 </form>
             </td>
         </tr>
