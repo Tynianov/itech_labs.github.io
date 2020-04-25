@@ -46,7 +46,6 @@
                 </form>
             </td>
             <td>
-                <form action="io_traffic.php" method="post">
                     <textarea cols="40" rows="10">
                     <?php
                         require_once __DIR__ . "/vendor/autoload.php";
@@ -71,11 +70,8 @@
                         }
                         ?>
                     </textarea>
-
-                </form>
             </td>
             <td>
-                <form action="below_zero.php">
                 <textarea cols="40" rows="10">
                     <?php
                         require_once __DIR__ . "/vendor/autoload.php";
@@ -98,7 +94,6 @@
                         }
                         ?>
                     </textarea>
-                </form>
             </td>
         </tr>
     </table>
