@@ -118,7 +118,7 @@
             $('#last').click(function() {
                 let msg = $('#messages');
                 if(!msg.children().length) {
-                    $('#messages').html(localStorage.getItem('list'));
+                    msg.html(localStorage.getItem('list'));
                     $(this).html('Hide');
                 } else if(msg.hasClass('hiden')) {
                     msg.removeClass('hiden');
