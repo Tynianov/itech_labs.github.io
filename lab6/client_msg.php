@@ -15,28 +15,39 @@
             margin: 5px;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
 <body>
-    <?php
-        require_once __DIR__ . "/vendor/autoload.php";
-        $client = $_POST['client'];
-        try {
-            $collection = (new MongoDB\Client)->itech_var8->user;
-            $cursor = $collection->aggregate(array(
-                array(
-                    '$match' => array(
-                        'ip' => "$client"
+    <ul id="messages">
+        <?php
+            require_once __DIR__ . "/vendor/autoload.php";
+            $client = $_POST['client'];
+            try {
+                $collection = (new MongoDB\Client)->itech_var8->user;
+                $cursor = $collection->aggregate(array(
+                    array(
+                        '$match' => array(
+                            'ip' => "$client"
+                        )
                     )
-                )
-            ));
-            foreach ($cursor as $doc) {
-                print_r($doc['messages']);
+                ));
+                foreach ($cursor as $doc) {
+                    foreach ($doc['messages'] as $msg) {
+                        if($msg)
+                            echo "<li>$msg</li>";
+                    }
+                }
+            } catch (PDOException $e) {
+                echo $e;
             }
-        } catch (PDOException $e) {
-            echo $e;
-        }
-    ?>
+        ?>
+    </ul>
+        <script>
+        $(document).ready(function() {
+            localStorage.list = $('#messages').html();
+        });
+        </script>
 </body>
 
 </html>

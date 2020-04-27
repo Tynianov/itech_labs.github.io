@@ -14,8 +14,16 @@
         input {
             margin: 5px;
         }
+        a {
+            color: white;
+        } 
+        .hiden {
+            display: none;
+        }
     </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
+
 
 <body>
     <table width="100%">
@@ -42,7 +50,10 @@
                         }
                         ?>
                     </select>
-                    <button>Submit</button>
+                    <button>Submit</button><br><br>
+                    <a id="last" style="display: none" href="#">Show last</a>
+                    <ul id="messages">
+                    </ul>
                 </form>
             </td>
             <td>
@@ -97,6 +108,28 @@
             </td>
         </tr>
     </table>
+
+    <script>
+        $(document).ready(function() {
+            if(localStorage.getItem('list') !== null) {
+                $('#last').css('display', 'block');
+            }
+
+            $('#last').click(function() {
+                let msg = $('#messages');
+                if(!msg.children().length) {
+                    $('#messages').html(localStorage.getItem('list'));
+                    $(this).html('Hide');
+                } else if(msg.hasClass('hiden')) {
+                    msg.removeClass('hiden');
+                    $(this).html('Hide');
+                } else {
+                    msg.addClass('hiden');
+                    $(this).html('Show last');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
